@@ -29,11 +29,9 @@ public class Encriptor {
 	}
 
 	private String encript(String word, boolean isChar) {
-		char[] wordArray = word.toCharArray();
 		String newWord = "";
 		for (int i = 0; i < word.length(); i++) {
-			int charValue = wordArray[i];
-			newWord += buildNewWord(isChar, charValue);
+			newWord += buildNewWord(isChar, word.charAt(i));
 		}
 		return newWord;
 	}
