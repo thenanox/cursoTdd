@@ -5,12 +5,12 @@ import java.security.InvalidParameterException;
 public class Encriptor {
 
 	public String cryptWord(String word) {
-		validateIsWord(word);
+		assertThatIsWord(word);
 		return encript(word, true);
 	}
 
 	public String cryptWordToNumbers(String word) {
-		validateIsWord(word);
+		assertThatIsWord(word);
 		return encript(word, false);
 	}
 
@@ -18,7 +18,7 @@ public class Encriptor {
 		return encript(sentence, true);
 	}
 
-	private void validateIsWord(String word) {
+	private void assertThatIsWord(String word) {
 		if (wordContainsSpace(word)) {
 			throw new InvalidParameterException();
 		}
