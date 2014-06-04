@@ -1,6 +1,7 @@
 package com.adesis.cursoTDD.parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
@@ -13,9 +14,11 @@ public class Parser {
 	public List<String> parse(String query) {
 		List<String> results = new ArrayList<String>();
 		query = deleteExcludedWords(query).toUpperCase();
-		query = deleteSigns(query);
-		query = deletePluralWord(query);
-		results.add(query);
+		for (String word : splitBySpace(query)) {
+			word = deleteSigns(word);
+			word = deletePluralWord(word);
+			results.add(word);
+		}
 
 		return results;
 	}
@@ -44,5 +47,10 @@ public class Parser {
 			}
 		}
 		return query;
+	}
+
+	private List<String> splitBySpace(String query) {
+		return Arrays.asList(query.split(" "));
+
 	}
 }
