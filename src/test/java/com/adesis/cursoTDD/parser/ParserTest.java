@@ -26,5 +26,11 @@ public class ParserTest {
 		List<String> results = parser.parse("cocineros");
 		assertThat(results.get(0)).isEqualTo("COCINERO");
 	}
+	
+	@Test
+	public void eliminar_signos_de_puntuacion_de_query() {
+		List<String> results = parser.parse("cocineros.");
+		assertThat(results.get(0)).isEqualTo("COCINERO");
+	}
 
 }
