@@ -1,4 +1,4 @@
-cursoTdd
+Curso Tdd
 ========
 
-curso-tdd
+Repositorio para el curso de TDD en Adesis
