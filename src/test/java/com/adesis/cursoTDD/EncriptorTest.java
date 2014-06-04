@@ -1,8 +1,10 @@
 package com.adesis.cursoTDD;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.security.InvalidParameterException;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class EncriptorTest {
@@ -11,6 +13,15 @@ public class EncriptorTest {
 	private static final String DEFAULT_CHARS = "hxlx";
 	private static final String DEFAULT_WORD = "hola";
 	private Encriptor encriptor = new Encriptor();
+	private Validator validator = new Validator();
+	private EncryptStrategy encryptStrategy; 
+	
+	@Before
+	public void setUp(){
+		encryptStrategy = new EncryptCharStrategy();
+		encriptor.setStrategy(encryptStrategy);
+		encriptor.setValidator(validator);
+	}
 	
 	@Test(expected=NullPointerException.class)
 	public void checkNullToWord(){
@@ -36,7 +47,9 @@ public class EncriptorTest {
 	
 	@Test
 	public void checkDefaultWordToNumber(){
-		String result = encriptor.cryptWordToNumbers(DEFAULT_WORD);
+		encryptStrategy = new EncryptNumberStrategy();
+		encriptor.setStrategy(encryptStrategy);
+		String result = encriptor.cryptWord(DEFAULT_WORD);
 		assertThat(result).isEqualTo("10611311099");
 	}
 	

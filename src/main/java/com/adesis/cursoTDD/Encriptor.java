@@ -3,57 +3,37 @@ package com.adesis.cursoTDD;
 import java.security.InvalidParameterException;
 
 public class Encriptor {
-
-	public String cryptWord(String word) {
-		assertThatIsWord(word);
-		return encrypt(word, true);
+	
+	private Validator validator;
+	private EncryptStrategy strategy;
+	
+	public void setValidator(Validator validator) {
+		this.validator = validator;
 	}
 
-	public String cryptWordToNumbers(String word) {
-		assertThatIsWord(word);
-		return encrypt(word, false);
+	public void setStrategy(EncryptStrategy strategy) {
+		this.strategy = strategy;
+	}
+
+	public String cryptWord(String word) {
+		validator.assertThatIsWord(word);
+		return encrypt(word);
 	}
 
 	public String cryptSentence(String sentence) {
-		return encrypt(sentence, true);
-	}
-	
-	private void assertThatIsWord(String word) {
-		if (wordContainsSpace(word)) {
-			throw new InvalidParameterException();
-		}
+		return encrypt(sentence);
 	}
 
-	private boolean wordContainsSpace(String word) {
-		return word.contains(" ");
-	}
-
-	private String encrypt(String word, boolean isChar) {
+	private String encrypt(String word) {
 		String newWord = "";
 		for (int i = 0; i < word.length(); i++) {
-			newWord += buildNewWord(isChar, word.charAt(i));
+			newWord += strategy.crypt(word.charAt(i));
 		}
 		return newWord;
 	}
 
-	private String buildNewWord(boolean cryptAsChar, int valueToCrypt) {
-		if (cryptAsChar) {
-			return cryptStringAsChar(valueToCrypt);
-		} else {
-			return cryptStringAsNumber(valueToCrypt);
-		}
-	}
-
-	private String cryptStringAsChar(int charValue) {
-		return String.valueOf((char) (charValue + 2));
-	}
-
-	private String cryptStringAsNumber(int charValue) {
-		return String.valueOf(charValue + 2);
-	}
-
 	public String cryptWord(String word, String charsToReplace) {
-		assertThatIsWord(word);
+		validator.assertThatIsWord(word);
 		char[] result = word.toCharArray();
 		for (int i = 0; i < word.length(); i++) {
 			for (int j = 0; j < charsToReplace.length(); j++) {
