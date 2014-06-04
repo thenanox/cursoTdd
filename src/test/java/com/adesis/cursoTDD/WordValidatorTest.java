@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.adesis.cursoTDD.encriptor.validator.WordValidator;
 
-public class ValidatorTest {
+public class WordValidatorTest {
 
 	private static final String WORD = "hola";
 	private WordValidator validator = new WordValidator();
