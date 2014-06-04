@@ -1,8 +1,8 @@
 package com.adesis.cursoTDD;
 
+import static org.assertj.core.api.Assertions.*;
 import java.security.InvalidParameterException;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class EncriptorTest {
@@ -20,13 +20,13 @@ public class EncriptorTest {
 	@Test
 	public void checkEmptyWordToWord(){
 		String result = encriptor.cryptWord("");
-		Assert.assertEquals("", result);
+		assertThat(result).isEqualTo("");
 	}
 	
 	@Test
 	public void checkDefaultWordToWord(){
 		String result = encriptor.cryptWord(DEFAULT_WORD);
-		Assert.assertEquals("jqnc", result);
+		assertThat(result).isEqualTo("jqnc");
 	}
 	
 	@Test(expected=InvalidParameterException.class)
@@ -37,25 +37,25 @@ public class EncriptorTest {
 	@Test
 	public void checkDefaultWordToNumber(){
 		String result = encriptor.cryptWordToNumbers(DEFAULT_WORD);
-		Assert.assertEquals("10611311099", result);
+		assertThat(result).isEqualTo("10611311099");
 	}
 	
 	@Test
 	public void checkDefaultWordAndCharsToWord(){
 		String result = encriptor.cryptWord(DEFAULT_WORD, DEFAULT_CHARS);
-		Assert.assertEquals("jona", result);
+		assertThat(result).isEqualTo("jona");
 	}
 	
 	@Test
 	public void checkDefaulSentenceToWord(){
 		String result = encriptor.cryptSentence(DEFAULT_SENTENCE);
-		Assert.assertEquals("Jqnc\"Owpfq", result);
+		assertThat(result).isEqualTo("Jqnc\"Owpfq");
 	}
 	
 	@Test
 	public void checkGetWord(){
 		String[] result = encriptor.getWords(DEFAULT_SENTENCE);
 		String[] expected = {"Hola","Mundo"};
-		Assert.assertArrayEquals(expected, result);
+		assertThat(result).isEqualTo(expected);
 	}
 }
