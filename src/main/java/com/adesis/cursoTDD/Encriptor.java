@@ -1,12 +1,10 @@
 package com.adesis.cursoTDD;
 
-import java.security.InvalidParameterException;
-
 public class Encriptor {
-	
+
 	private Validator validator;
 	private EncryptStrategy strategy;
-	
+
 	public void setValidator(Validator validator) {
 		this.validator = validator;
 	}
