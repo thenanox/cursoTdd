@@ -6,18 +6,18 @@ public class Encriptor {
 
 	public String cryptWord(String word) {
 		assertThatIsWord(word);
-		return encript(word, true);
+		return encrypt(word, true);
 	}
 
 	public String cryptWordToNumbers(String word) {
 		assertThatIsWord(word);
-		return encript(word, false);
+		return encrypt(word, false);
 	}
 
 	public String cryptSentence(String sentence) {
-		return encript(sentence, true);
+		return encrypt(sentence, true);
 	}
-
+	
 	private void assertThatIsWord(String word) {
 		if (wordContainsSpace(word)) {
 			throw new InvalidParameterException();
@@ -28,7 +28,7 @@ public class Encriptor {
 		return word.contains(" ");
 	}
 
-	private String encript(String word, boolean isChar) {
+	private String encrypt(String word, boolean isChar) {
 		String newWord = "";
 		for (int i = 0; i < word.length(); i++) {
 			newWord += buildNewWord(isChar, word.charAt(i));
@@ -36,33 +36,29 @@ public class Encriptor {
 		return newWord;
 	}
 
-	private String buildNewWord(boolean isChar, int charValue) {
-		if (isChar) {
-			return castStringFromChar(charValue);
+	private String buildNewWord(boolean cryptAsChar, int valueToCrypt) {
+		if (cryptAsChar) {
+			return cryptStringAsChar(valueToCrypt);
 		} else {
-			return castStringFromInt(charValue);
+			return cryptStringAsNumber(valueToCrypt);
 		}
 	}
 
-	private String castStringFromChar(int charValue) {
+	private String cryptStringAsChar(int charValue) {
 		return String.valueOf((char) (charValue + 2));
 	}
 
-	private String castStringFromInt(int charValue) {
+	private String cryptStringAsNumber(int charValue) {
 		return String.valueOf(charValue + 2);
 	}
 
 	public String cryptWord(String word, String charsToReplace) {
-		if (wordContainsSpace(word))
-			throw new InvalidParameterException();
-
-		char[] wordArray = word.toCharArray();
-		char[] replacement = charsToReplace.toCharArray();
-		char[] result = wordArray.clone();
-		for (int i = 0; i < wordArray.length; i++) {
-			for (int j = 0; j < replacement.length; j++) {
-				if (replacement[j] == wordArray[i]) {
-					int charValue = wordArray[i];
+		assertThatIsWord(word);
+		char[] result = word.toCharArray();
+		for (int i = 0; i < word.length(); i++) {
+			for (int j = 0; j < charsToReplace.length(); j++) {
+				if (charsToReplace.charAt(j) == word.charAt(i)) {
+					int charValue = word.charAt(i);
 					result[i] = (char) (charValue + 2);
 				}
 			}
