@@ -14,7 +14,11 @@ public class Parser {
 				query = query.replace(exclusion, "");
 			}
 		}
-		results.add(query.toUpperCase());
+		query = query.toUpperCase();
+		if(query.endsWith("S")){
+			query = query.substring(0, query.length() - 1);
+		}
+		results.add(query);
 		return results;
 	}
 
