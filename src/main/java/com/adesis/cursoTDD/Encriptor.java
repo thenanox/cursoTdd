@@ -5,35 +5,58 @@ import java.security.InvalidParameterException;
 public class Encriptor {
 
 	public String cryptWord(String word) {
-		if (word.contains(" "))
-			throw new InvalidParameterException();
-
-		char[] wordArray = word.toCharArray();
-		String newWord = "";
-		for (int i = 0; i < word.length(); i++) {
-			int charValue = wordArray[i];
-			newWord += String.valueOf((char) (charValue + 2));
-		}
-
-		return newWord;
+		validateIsWord(word);
+		return encript(word, true);
 	}
 
 	public String cryptWordToNumbers(String word) {
-		if (word.contains(" "))
-			throw new InvalidParameterException();
+		validateIsWord(word);
+		return encript(word, false);
+	}
 
+	public String cryptSentence(String sentence) {
+		return encript(sentence, true);
+	}
+	
+	private void validateIsWord(String word) {
+		if (wordContainsSpace(word)) {
+			throw new InvalidParameterException();
+		}
+	}
+
+	private boolean wordContainsSpace(String word) {
+		return word.contains(" ");
+	}
+
+	private String encript(String word, boolean isChar) {
 		char[] wordArray = word.toCharArray();
 		String newWord = "";
 		for (int i = 0; i < word.length(); i++) {
 			int charValue = wordArray[i];
-			newWord += String.valueOf(charValue + 2);
+			newWord = buildNewWord(isChar, newWord, charValue);
 		}
-
 		return newWord;
 	}
 
+	private String buildNewWord(boolean isChar, String newWord, int charValue) {
+		if (isChar) {
+			newWord += castStringFromChar(charValue);
+		} else {
+			newWord += castStringFromInt(charValue);
+		}
+		return newWord;
+	}
+
+	private String castStringFromChar(int charValue) {
+		return String.valueOf((char) (charValue + 2));
+	}
+
+	private String castStringFromInt(int charValue) {
+		return String.valueOf(charValue + 2);
+	}
+
 	public String cryptWord(String word, String charsToReplace) {
-		if (word.contains(" "))
+		if (wordContainsSpace(word))
 			throw new InvalidParameterException();
 
 		char[] wordArray = word.toCharArray();
@@ -50,16 +73,6 @@ public class Encriptor {
 		return String.valueOf(result);
 	}
 
-	public String cryptSentence(String sentence) {
-		char[] sentenceArray = sentence.toCharArray();
-		String newWord = "";
-		for (int i = 0; i < sentence.length(); i++) {
-			int charValue = sentenceArray[i];
-			newWord += String.valueOf((char) (charValue + 2));
-		}
-
-		return newWord;
-	}
 
 	public String[] getWords(String sentence) {
 		return sentence.split(" ");
