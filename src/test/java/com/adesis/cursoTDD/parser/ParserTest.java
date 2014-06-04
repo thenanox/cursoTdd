@@ -39,4 +39,10 @@ public class ParserTest {
 		assertThat(results).contains("COCINERO", "TORERO");
 	}
 
+	@Test
+	public void elimina_duplicados() {
+		List<String> results = parser.parse("cocinero cocinero torero");
+		assertThat(results).contains("COCINERO TORERO");
+	}
+
 }
