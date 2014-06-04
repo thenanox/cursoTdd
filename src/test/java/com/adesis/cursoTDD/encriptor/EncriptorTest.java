@@ -1,4 +1,4 @@
-package com.adesis.cursoTDD;
+package com.adesis.cursoTDD.encriptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
