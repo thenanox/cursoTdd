@@ -1,8 +1,8 @@
-package com.adesis.cursoTDD;
+package com.adesis.cursoTDD.encriptor.validator;
 
 import java.security.InvalidParameterException;
 
-public class Validator {
+public class WordValidator {
 	public void assertThatIsWord(String word) {
 		if (word.contains(" ")) {
 			throw new InvalidParameterException();
