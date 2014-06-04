@@ -17,7 +17,7 @@ public class Encriptor {
 	public String cryptSentence(String sentence) {
 		return encript(sentence, true);
 	}
-	
+
 	private void validateIsWord(String word) {
 		if (wordContainsSpace(word)) {
 			throw new InvalidParameterException();
@@ -33,18 +33,17 @@ public class Encriptor {
 		String newWord = "";
 		for (int i = 0; i < word.length(); i++) {
 			int charValue = wordArray[i];
-			newWord = buildNewWord(isChar, newWord, charValue);
+			newWord += buildNewWord(isChar, charValue);
 		}
 		return newWord;
 	}
 
-	private String buildNewWord(boolean isChar, String newWord, int charValue) {
+	private String buildNewWord(boolean isChar, int charValue) {
 		if (isChar) {
-			newWord += castStringFromChar(charValue);
+			return castStringFromChar(charValue);
 		} else {
-			newWord += castStringFromInt(charValue);
+			return castStringFromInt(charValue);
 		}
-		return newWord;
 	}
 
 	private String castStringFromChar(int charValue) {
@@ -72,7 +71,6 @@ public class Encriptor {
 		}
 		return String.valueOf(result);
 	}
-
 
 	public String[] getWords(String sentence) {
 		return sentence.split(" ");
