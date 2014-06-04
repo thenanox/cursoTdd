@@ -1,4 +1,4 @@
-package com.adesis.cursoTDD;
+package com.adesis.cursoTDD.encriptor.strategy;
 
 public class EncryptNumberStrategy implements EncryptStrategy {
 

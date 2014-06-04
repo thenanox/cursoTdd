@@ -1,11 +1,14 @@
-package com.adesis.cursoTDD;
+package com.adesis.cursoTDD.encriptor;
+
+import com.adesis.cursoTDD.encriptor.strategy.EncryptStrategy;
+import com.adesis.cursoTDD.encriptor.validator.WordValidator;
 
 public class Encriptor {
 
-	private Validator validator;
+	private WordValidator validator;
 	private EncryptStrategy strategy;
 
-	public void setValidator(Validator validator) {
+	public void setValidator(WordValidator validator) {
 		this.validator = validator;
 	}
 
