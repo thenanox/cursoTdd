@@ -33,4 +33,10 @@ public class ParserTest {
 		assertThat(results.get(0)).isEqualTo("COCINERO");
 	}
 
+	@Test
+	public void split_por_espacios() {
+		List<String> results = parser.parse("cocinero torero");
+		assertThat(results).contains("COCINERO", "TORERO");
+	}
+
 }
