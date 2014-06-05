@@ -18,7 +18,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void transform_word_to_uppercase() {
+	public void transformar_query_a_mayusculas() {
 		List<String> results = parser.parse("cocinero");
 		assertThat(results).contains("COCINERO");
 	}
@@ -57,6 +57,12 @@ public class ParserTest {
 	public void elimina_duplicados() {
 		List<String> results = parser.parse("cocinero cocinero torero");
 		assertThat(results).contains("COCINERO", "TORERO");
+	}
+	
+	@Test
+	public void modifica_tildes_y_caracteres() {
+		List<String> results = parser.parse("Arguíñáno");
+		assertThat(results).contains("ARGUINANO");
 	}
 
 	@Test
