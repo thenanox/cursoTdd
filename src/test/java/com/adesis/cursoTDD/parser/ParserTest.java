@@ -44,5 +44,11 @@ public class ParserTest {
 		List<String> results = parser.parse("cocinero cocinero torero");
 		assertThat(results).contains("COCINERO", "TORERO");
 	}
+	
+	@Test
+	public void modifica_tildes_y_caracteres() {
+		List<String> results = parser.parse("Arguíñáno");
+		assertThat(results).contains("ARGUINANO");
+	}
 
 }
