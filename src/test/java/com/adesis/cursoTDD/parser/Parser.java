@@ -8,17 +8,20 @@ import java.util.Set;
 
 public class Parser {
 
-	private static final String[] EXCLUSIONS_LIST = { "un ", "uno ", "una ", "unos ", "unas ",
-			"el ", "la ", "los ", "las " };
+	private Language language;
+
+	public Parser(Language language) {
+		this.setLanguage(language);
+	}
 
 	private static final String[] SIGNS_EXCLUDED = { ".", ",", ";", "(", ")", "/" };
 
 	public List<String> parse(String query) {
 		List<String> results = new ArrayList<String>();
-		query = deleteExcludedWords(query).toUpperCase();
+		query = language.deleteExcludedWords(this, query).toUpperCase();
 		for (String word : splitBySpace(query)) {
 			word = deleteSigns(word);
-			word = deletePluralWord(word);
+			word = language.deletePluralWord(this, word);
 			results.add(word);
 		}
 
@@ -35,22 +38,6 @@ public class Parser {
 		return query;
 	}
 
-	private String deletePluralWord(String query) {
-		if (query.endsWith("S")) {
-			query = query.substring(0, query.length() - 1);
-		}
-		return query;
-	}
-
-	private String deleteExcludedWords(String query) {
-		for (String exclusion : EXCLUSIONS_LIST) {
-			if (query.contains(exclusion)) {
-				query = query.replace(exclusion, "");
-			}
-		}
-		return query;
-	}
-
 	private List<String> splitBySpace(String query) {
 		return Arrays.asList(query.split(" "));
 
@@ -64,5 +51,13 @@ public class Parser {
 
 		return new ArrayList<String>(words);
 
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 }
