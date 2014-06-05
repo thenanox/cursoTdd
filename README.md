@@ -15,3 +15,6 @@ Se ha creado un parseador que se encarga de transformar las palabras para estand
 
 DIA 2:
 -----
+**PARSER**
+
+Se ha añadido funcionalidad para internacionalizar los articulos y el control de los plurales
