@@ -2,7 +2,9 @@ package com.adesis.cursoTDD.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Parser {
 
@@ -20,7 +22,7 @@ public class Parser {
 			results.add(word);
 		}
 
-		return results;
+		return removeDuplicatedWords(results);
 	}
 
 	private String deleteSigns(String query) {
@@ -51,6 +53,16 @@ public class Parser {
 
 	private List<String> splitBySpace(String query) {
 		return Arrays.asList(query.split(" "));
+
+	}
+
+	private List<String> removeDuplicatedWords(List<String> query) {
+		Set<String> words = new HashSet<String>();
+		for (String word : query) {
+			words.add(word);
+		}
+
+		return new ArrayList<String>(words);
 
 	}
 }

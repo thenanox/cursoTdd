@@ -42,7 +42,7 @@ public class ParserTest {
 	@Test
 	public void elimina_duplicados() {
 		List<String> results = parser.parse("cocinero cocinero torero");
-		assertThat(results).contains("COCINERO TORERO");
+		assertThat(results).contains("COCINERO", "TORERO");
 	}
 
 }
