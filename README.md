@@ -18,3 +18,7 @@ DIA 2:
 **PARSER**
 
 Se ha añadido funcionalidad para internacionalizar los articulos y el control de los plurales
+
+**ENCRIPTOR**
+
+Se ha externalizado el printer para imprimir el mensaje, y creado un espia manual para el testeo de la clase
