@@ -18,7 +18,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void transformar_query_a_mayusculas() {
+	public void transform_word_to_uppercase() {
 		List<String> results = parser.parse("cocinero");
 		assertThat(results).contains("COCINERO");
 	}
@@ -26,43 +26,37 @@ public class ParserTest {
 	@Test
 	public void eliminar_articulo_con_espacio_por_delante() {
 		List<String> results = parser.parse("un cocinero");
-		assertThat(results).contains("COCINERO");
+		assertThat(results).containsExactly("COCINERO").doesNotContain("UN");
 	}
 
 	@Test
 	public void eliminar_articulo_con_espacio_por_detras() {
 		List<String> results = parser.parse("cocinero un");
-		assertThat(results).contains("COCINERO");
+		assertThat(results).containsOnlyOnce("COCINERO").doesNotContain("UN");
 	}
 
 	@Test
 	public void eliminar_plural_de_query() {
 		List<String> results = parser.parse("cocineros");
-		assertThat(results).contains("COCINERO");
+		assertThat(results).containsOnlyOnce("COCINERO");
 	}
 
 	@Test
 	public void eliminar_signos_de_puntuacion_de_query() {
 		List<String> results = parser.parse("cocinero.");
-		assertThat(results).contains("COCINERO");
+		assertThat(results).containsOnlyOnce("COCINERO");
 	}
 
 	@Test
 	public void split_por_espacios() {
-		List<String> results = parser.parse("cocinero torero");
-		assertThat(results).contains("COCINERO", "TORERO");
+		List<String> results = parser.parse("cocinero el torero");
+		assertThat(results).contains("COCINERO", "TORERO").doesNotContain("EL");
 	}
 
 	@Test
 	public void elimina_duplicados() {
 		List<String> results = parser.parse("cocinero cocinero torero");
 		assertThat(results).contains("COCINERO", "TORERO");
-	}
-	
-	@Test
-	public void modifica_tildes_y_caracteres() {
-		List<String> results = parser.parse("Arguíñáno");
-		assertThat(results).contains("ARGUINANO");
 	}
 
 	@Test
@@ -75,7 +69,7 @@ public class ParserTest {
 	@Test
 	public void eliminar_plural_de_query_en_euskera() {
 		changeLanguageTo(euskeraLanguage);
-		List<String> results = parser.parse("cocinerok");
+		List<String> results = parser.parse("cocinero");
 		assertThat(results).contains("COCINERO");
 	}
 
@@ -83,7 +77,7 @@ public class ParserTest {
 	public void eliminar_articulo_de_query_en_maya() {
 		changeLanguageTo(mayaLanguage);
 		List<String> results = parser.parse("!!! cocinero");
-		assertThat(results).contains("COCINERO");
+		assertThat(results).contains("COCINERO").doesNotContain("!!!");
 	}
 
 	@Test
