@@ -2,6 +2,7 @@ package com.adesis.cursoTDD.encriptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.PrintStream;
 import java.security.InvalidParameterException;
 
 import org.junit.Before;
@@ -28,6 +29,8 @@ public class EncriptorTest {
 		encriptor.setStrategy(encryptStrategy);
 		encriptor.setValidator(validator);
 	}
+	
+	
 
 	@Test(expected = NullPointerException.class)
 	public void checkNullToWord() {
@@ -76,5 +79,20 @@ public class EncriptorTest {
 		String[] result = encriptor.getWords(DEFAULT_SENTENCE);
 		String[] expected = { "Hola", "Mundo" };
 		assertThat(result).isEqualTo(expected);
+	}
+	
+	public String callArguments;
+	
+	@Test
+	public void printToSystemOut() {
+		Logger spyLogger = new Logger(){
+			 @Override
+			 public void log(String message){
+				 callArguments = message;
+			 }
+		};
+		Printer printer = new Printer(spyLogger);
+		printer.print("hola");
+		assertThat("<hola>").isEqualTo(callArguments);
 	}
 }

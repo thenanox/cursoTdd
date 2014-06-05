@@ -7,6 +7,11 @@ public class Encriptor {
 
 	private WordValidator validator;
 	private EncryptStrategy strategy;
+	private Printer printer;
+
+	public void setPrintStream(Printer printer) {
+		this.printer = printer;
+	}
 
 	public void setValidator(WordValidator validator) {
 		this.validator = validator;
@@ -54,7 +59,7 @@ public class Encriptor {
 	public void printWords(String sentence) {
 		String[] words = getWords(sentence);
 		for (String word : words) {
-			System.out.print("<" + word + ">");
+			printer.print("<" + word + ">");
 		}
 	}
 
