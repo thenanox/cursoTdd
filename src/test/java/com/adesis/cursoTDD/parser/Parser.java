@@ -1,5 +1,6 @@
 package com.adesis.cursoTDD.parser;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ public class Parser {
 		query = deleteExcludedWords(query).toUpperCase();
 		for (String word : splitBySpace(query)) {
 			word = deleteSigns(word);
+			word = modifyAccentsAndSpecialCharacters(word);
 			word = deletePluralWord(word);
 			results.add(word);
 		}
@@ -33,6 +35,10 @@ public class Parser {
 		}
 
 		return query;
+	}
+	
+	private String modifyAccentsAndSpecialCharacters(String word) {
+		return Normalizer.normalize(word, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 	}
 
 	private String deletePluralWord(String query) {
