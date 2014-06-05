@@ -10,7 +10,7 @@ public class ParserTest {
 	private Parser parser = new Parser();
 
 	@Test
-	public void transform_word_to_uppercase() {
+	public void transformar_query_a_mayusculas() {
 		List<String> results = parser.parse("cocinero");
 		assertThat(results.get(0)).isEqualTo("COCINERO");
 	}
