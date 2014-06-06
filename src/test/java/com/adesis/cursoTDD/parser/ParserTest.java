@@ -49,8 +49,8 @@ public class ParserTest {
 
 	@Test
 	public void split_por_espacios() {
-		List<String> results = parser.parse("cocinero el torero");
-		assertThat(results).contains("COCINERO", "TORERO").doesNotContain("EL");
+		List<String> results = parser.parse("un bomberó toreros.");
+		assertThat(results).containsSequence("BOMBERO", "TORERO").doesNotContain("EL");
 	}
 
 	@Test
