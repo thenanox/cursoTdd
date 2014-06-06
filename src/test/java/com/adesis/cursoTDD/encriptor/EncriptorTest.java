@@ -2,13 +2,11 @@ package com.adesis.cursoTDD.encriptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.PrintStream;
 import java.security.InvalidParameterException;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.adesis.cursoTDD.encriptor.Encriptor;
 import com.adesis.cursoTDD.encriptor.strategy.EncryptCharStrategy;
 import com.adesis.cursoTDD.encriptor.strategy.EncryptNumberStrategy;
 import com.adesis.cursoTDD.encriptor.strategy.EncryptStrategy;
